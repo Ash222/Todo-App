@@ -1,30 +1,42 @@
 import { useState } from "react";
+import TodoCard from "./TodoCard";
 
 export default function Footer() {
   const [todoTitle, setTodoTitle] = useState(null);
   const [todoDescription, setTodoDescription] = useState(null);
+  const [todoDisplay, setTodoDisplay] = useState(false);
 
-  function getData() {}
+  function getData(event) {
+    event.preventDefault();
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    console.log(title);
+    console.log(description);
+    setTodoTitle(title);
+    setTodoDescription(description);
+    setTodoDisplay(true);
+  }
 
   return (
-    <div className="footer">
-      <input
-        type="text"
-        name="title"
-        placeholder="Title of todo"
-        onChange={(e) => {
-          setTodoTitle(e.target.value);
-        }}
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Describe your todo"
-        onChange={(e) => {
-          setTodoDescription(e.target.value);
-        }}
-      />
-      <button onClick={getData}>Add</button>
-    </div>
+    <>
+      {todoDisplay && (
+        <TodoCard title={todoTitle} description={todoDescription} />
+      )}
+      <div className="footer">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Title of todo"
+        />
+        <input
+          type="text"
+          id="description"
+          name="description"
+          placeholder="Describe your todo"
+        />
+        <button onClick={getData}>Add</button>
+      </div>
+    </>
   );
 }
