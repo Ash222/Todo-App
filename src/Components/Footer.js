@@ -2,26 +2,28 @@ import { useState } from "react";
 import TodoCard from "./TodoCard";
 
 export default function Footer() {
-  const [todoTitle, setTodoTitle] = useState(null);
-  const [todoDescription, setTodoDescription] = useState(null);
+  const [todoTitle, setTodoTitle] = useState(undefined);
+  const [todoDescription, setTodoDescription] = useState(undefined);
   const [todoDisplay, setTodoDisplay] = useState(false);
 
   function getData(event) {
-    event.preventDefault();
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-    console.log(title);
-    console.log(description);
-    setTodoTitle(title);
-    setTodoDescription(description);
+    document.getElementById("title").value === ""
+      ? setTodoTitle(undefined)
+      : setTodoTitle(document.getElementById("title").value);
+
+    document.getElementById("description").value === ""
+      ? setTodoDescription(undefined)
+      : setTodoDescription(document.getElementById("description").value);
+
+    //Why todoTitle and todoDescription is holding the previous states, even though I'm changing it with each click?
+    console.log(todoTitle);
+    console.log(todoDescription);
+
     setTodoDisplay(true);
   }
 
   return (
     <>
-      {todoDisplay && (
-        <TodoCard title={todoTitle} description={todoDescription} />
-      )}
       <div className="footer">
         <input
           type="text"
@@ -37,6 +39,9 @@ export default function Footer() {
         />
         <button onClick={getData}>Add</button>
       </div>
+      {todoDisplay && (
+        <TodoCard title={todoTitle} description={todoDescription}></TodoCard>
+      )}
     </>
   );
 }
