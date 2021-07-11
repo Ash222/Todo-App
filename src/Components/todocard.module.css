@@ -1,4 +1,5 @@
 .todoCard {
+  display: inline-block;
   margin: 0;
   height: 400px;
   width: 500px;

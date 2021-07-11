@@ -10,11 +10,15 @@ export default function Container() {
   // This is to get input's description from the footer form
   const [todoDescription, setTodoDescription] = useState(undefined);
 
-  // This is to display the todo card only when it is true.
-  const [todoDisplay, setTodoDisplay] = useState(false);
+  // This is to display the todo card only when it is true , ie anything but 0.
+  const [todoDisplay, setTodoDisplay] = useState(0);
 
   // This function is passed to footer component (as prop) and gets triggered only when form's button is clicked.
+
   function getData(event) {
+    event.preventDefault();
+    console.log("form is submit.");
+
     document.getElementById("title").value === ""
       ? setTodoTitle(undefined)
       : setTodoTitle(document.getElementById("title").value);
@@ -26,24 +30,41 @@ export default function Container() {
     //Why todoTitle and todoDescription is holding the previous states, even though I'm changing it with each click?
     console.log(todoTitle);
     console.log(todoDescription);
+    console.log("before todoDisplay :" + todoDisplay);
 
-    setTodoDisplay(true);
+    setTodoDisplay(todoDisplay + 1);
+    console.log("after setting todoDisplay : " + todoDisplay);
   }
 
-  function setTodoDisplayAgain() {
-    setTodoDisplay(false);
+  // This function is going to be passed to TodoCard component when clicked it will delete the coponent.
+
+  function deleteTodoCard(event) {
+    console.log("Inside delete function when delete key is clicked.");
+    const child = event.target.parentNode.parentNode;
+    console.log(child);
+    console.log(event.target.parentNode.parentNode.parentNode);
+
+    // setTodoDisplay(todoDisplay - 1);
+
+    // I'm able to remove the card. But it is not being shown again when I submit the form again.Since the state todoDisplay is set to true.
+    event.target.parentNode.parentNode.parentNode.removeChild(child);
   }
 
   return (
     <>
       <Footer onSubmit={getData} />
-      {todoDisplay && (
-        <TodoCard
-          title={todoTitle}
-          description={todoDescription}
-          showTodoCard={setTodoDisplayAgain}
-        ></TodoCard>
-      )}
+      {(() => {
+        if (todoDisplay) {
+          console.log("Inside the self invoked function. " + todoDisplay);
+          return (
+            <TodoCard
+              title={todoTitle}
+              description={todoDescription}
+              delete={deleteTodoCard}
+            />
+          );
+        } else return null;
+      })()}
     </>
   );
 }
