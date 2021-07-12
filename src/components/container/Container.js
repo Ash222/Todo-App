@@ -1,6 +1,7 @@
-import Footer from "./Footer";
-import TodoCard from "./TodoCard";
+import TodoCard from "./../todo/TodoCard";
+import Todoform from "./../todoform/Todoform";
 import { useState } from "react";
+import style from "./container.module.css";
 
 export default function Container() {
   // below are the states-
@@ -51,8 +52,8 @@ export default function Container() {
   }
 
   return (
-    <>
-      <Footer onSubmit={getData} />
+    <div className={style.container}>
+      <Todoform onSubmit={getData} />
       {(() => {
         if (todoDisplay) {
           console.log("Inside the self invoked function. " + todoDisplay);
@@ -65,6 +66,6 @@ export default function Container() {
           );
         } else return null;
       })()}
-    </>
+    </div>
   );
 }

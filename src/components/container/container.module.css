@@ -1,0 +1,11 @@
+.container {
+  background-color: hsl(240, 70%, 30%);
+  min-height: 50vh;
+  width: 50vw;
+  padding: 2em;
+  margin: 3rem auto;
+}
+
+.container:hover {
+  background-color: hsl(250, 65%, 25%);
+}
