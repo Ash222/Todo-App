@@ -1,53 +1,60 @@
-.todoCard {
-  display: inline-block;
-  margin: 0;
-  height: 400px;
-  width: 500px;
-  border: 2px solid black;
-  border-radius: 20px;
-  background-color: aqua;
-  position: relative;
-}
-
-.todoTitle {
-  position: absolute;
-  top: -1%;
-  left: 4%;
-  font-size: 40px;
-  /* background-color: beige; */
-}
-
-.todoDescription {
-  position: absolute;
-  height: 50%;
-  width: 90%;
-  top: 15%;
-  left: 2%;
-  overflow-y: scroll;
-  padding: 0.4em;
-  background-color: aqua;
-  font-size: 25px;
-}
-
-.todoBtnContainer {
-  /* background-color: tomato; */
-  position: absolute;
-  bottom: 2%;
-  right: 6%;
-  height: 20%;
+.todoCardContainer {
+  min-width: 100%;
+  background-color: rgb(24, 57, 117);
+  margin-top: 2em;
+  padding: 2em;
   display: flex;
-  width: 90%;
-  gap: 30px;
-  justify-content: flex-end;
-  align-items: center;
+  flex-flow: column wrap;
+  user-select: none;
 }
 
-.todoBtn {
-  font-size: 28px;
+.todoCard {
+  background-color: rgb(48, 127, 231);
+  min-width: 100%;
+  min-height: 20vh;
+  border: 2px solid blue;
+  border-radius: 2em;
+  outline: none;
+  margin-bottom: 2em;
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+.todoCardDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.todoCardTitle {
+  margin-bottom: 0.5em;
+  font-size: 1.8em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.todoCardDescription {
+  font-size: 1.4em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.todoCardBtn {
   font-weight: bold;
-  padding: 0.2em;
-  width: 30%;
-  border-radius: 15px;
-  border: 2px solid red;
+  font-size: 1.6em;
   cursor: pointer;
+  border-radius: 30px;
+  border: 2px white solid;
+  outline: none;
+}
+
+.todoCardBtn:focus {
+  border: 2px black solid;
+}
+
+.todoCardBtn:hover {
+  color: white;
+  background-color: hsl(0, 20%, 20%);
 }

@@ -1,24 +1,35 @@
-import classes from "./todocard.module.css";
+import style from "./todocard.module.css";
 
 function TodoCard(props) {
   return (
-    <div className={classes.todoCard}>
-      {console.log("todo component is called.")}
-      <h2 className={classes.todoTitle}>
-        {props.title === undefined ? "Add Todo Title" : props.title}
-      </h2>
-      <p className={classes.todoDescription}>
-        {props.description === undefined
-          ? "Add some todo description"
-          : props.description}
-      </p>
-      <div className={classes.todoBtnContainer}>
-        <button className={classes.todoBtn} onClick={props.delete}>
-          Delete
-        </button>
-        <button className={classes.todoBtn}>Edit</button>
-      </div>
-    </div>
+    <>
+      {props.todo.length === 0 ? null : (
+        <div className={style.todoCardContainer}>
+          {props.todo.map((todoCard) => {
+            return (
+              <div className={style.todoCard} key={todoCard.id}>
+                <div className={style.todoCardDetails}>
+                  <h5 className={style.todoCardTitle}>
+                    {todoCard.titleText === "" ? "Todo" : todoCard.titleText}
+                  </h5>
+                  <p className={style.todoCardDescription}>
+                    {todoCard.descriptionText === ""
+                      ? "Todo description"
+                      : todoCard.descriptionText}
+                  </p>
+                </div>
+                <button
+                  className={style.todoCardBtn}
+                  onClick={() => props.delete(todoCard.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 }
 
